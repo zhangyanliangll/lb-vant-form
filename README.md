@@ -6,7 +6,7 @@
 
 ```bash
 # vue3
-npm install lbVantform -S
+npm install lb-vant-form -S
 ```
 
 ## 使用
@@ -16,7 +16,7 @@ npm install lbVantform -S
 在`main.ts`文件中引入并注册
 
 ```ts
-import lbVantForm from 'lbVantForm'
+import lbVantForm from 'lb-vant-form'
 const app = createApp(App)
 app.use(lbVantForm)
 ```
@@ -50,5 +50,5 @@ import { ref } from 'vue'
 `change`颜色值改变的时候触发
 
 ```js
-<lbVantForm />
+<lb-vant-form />
 ```

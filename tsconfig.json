@@ -10,6 +10,9 @@
   ],
   "compilerOptions": {
     "baseUrl": ".",
+    "types": [
+      "unplugin-vue-define-options/macros-global"
+    ],
     "paths": {
       "@/*": [
         "./examples/*"

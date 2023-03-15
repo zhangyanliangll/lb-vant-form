@@ -1,25 +1,21 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="page-container"></div>
+  <div class="page-container">奥术大师大</div>
 </template>
-<script lang="ts">
-export default {
-  name: "LbVantForm"
-}
-</script>
 
 <script lang="ts" setup>
 import { onBeforeMount, watch, reactive, nextTick } from 'vue'
 
 // 组件名字
-// defineOptions({
-//   name: 'LbVantForm'
-// })
+defineOptions({
+  name: 'lb-vant-form',
+})
 
 const props = defineProps({
   id: {
     type: String,
-    default: () => ''
-  }
+    default: () => '',
+  },
 })
 const emit = defineEmits(['loadData'])
 
@@ -31,7 +27,7 @@ watch(
     if (value) {
       loadData()
     }
-  }
+  },
 )
 
 onBeforeMount(async () => {
@@ -49,7 +45,7 @@ const init = async () => {
 const loadData = async () => {
   const api: any = ''
   const result = await api({
-    id: props.id
+    id: props.id,
   })
   Object.assign(detail, result)
   console.log('loadData:', result)
@@ -70,7 +66,7 @@ const cancel = async () => {
 defineExpose({
   loadData,
   submit,
-  cancel
+  cancel,
 })
 </script>
 
