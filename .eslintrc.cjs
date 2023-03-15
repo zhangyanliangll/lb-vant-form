@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-var': 'error', // error; 要求使用 let 或 const 而不是 var
+    'no-var': 'error',
+    'vue/multi-word-component-names': 'off',
   },
 }

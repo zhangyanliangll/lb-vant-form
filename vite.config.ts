@@ -13,9 +13,9 @@ export default defineConfig((env) => {
     plugins: [vue(), vueJsx(), DefineOptions()],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./examples', import.meta.url))
-      }
-    }
+        '@': fileURLToPath(new URL('./examples', import.meta.url)),
+      },
+    },
   }
 
   // 当执行 yarn lib 设置环境变量 --mode lib 时
@@ -25,17 +25,17 @@ export default defineConfig((env) => {
       lib: {
         entry: resolve(__dirname, 'packages/main.ts'),
         name: 'lb-vant-form',
-        fileName: 'lb-vant-form'
+        fileName: 'lb-vant-form',
       },
       rollupOptions: {
         external: ['vue'],
         output: {
           globals: {
-            vue: 'Vue'
+            vue: 'Vue',
           },
-          dir: 'lib'
-        }
-      }
+          dir: 'lib',
+        },
+      },
     }
   }
   return defaultConfig

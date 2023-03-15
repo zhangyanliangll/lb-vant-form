@@ -7,23 +7,20 @@
         href="https://github.com/zhangyanliang/lb-vant-form"
         class="btn"
         target="_blank"
-      >View on GitHub</a>
+        >View on GitHub</a
+      >
     </div>
-    <div
-      class="page-content"
-      v-hljs
-    >
+    <div class="page-content" v-hljs>
       <h1>lbVantForm</h1>
       <p>
-        本插件仿照<code>Angular</code>的<code><a href="http://zhangbobell.github.io/color-picker/" target="_blank"
-                >color-picker</a
-              ></code>插件制作
+        本插件仿照<code>Angular</code>的<code
+          ><a href="http://zhangbobell.github.io/color-picker/" target="_blank"
+            >color-picker</a
+          ></code
+        >插件制作
       </p>
       <h2>Demo</h2>
-      <colorPicker
-        v-model="color"
-        @change="headleChangeColor"
-      ></colorPicker>
+      <colorPicker v-model="color" @change="headleChangeColor"></colorPicker>
       <h2>特点</h2>
       <ol>
         <li>简单易用，UI在原插件基础上优化增加了圆角和过渡动画</li>
@@ -40,7 +37,8 @@
             # main.js
             import vcolorpicker from 'vcolorpicker'
             Vue.use(vcolorpicker)
-        </pre>
+        </pre
+      >
       <h3>在项目中使用 vcolorpicker</h3>
       <pre>
     &lt;template&gt;
@@ -54,12 +52,15 @@
             }
           }
         }
-      &lt;/script&gt;</pre>
+      &lt;/script&gt;</pre
+      >
       <h2>选项</h2>
       <p>你可以通过在所在的元素上设置以下属性来配置<code>color-picker</code></p>
       <ol>
         <li>
-          <code>defaultColor</code>：默认颜色，如<code>defaultColor="#ff0000"</code>
+          <code>defaultColor</code>：默认颜色，如<code
+            >defaultColor="#ff0000"</code
+          >
         </li>
         <li><code>disabled</code>：禁用状态，如<code>disabled=true</code></li>
       </ol>
@@ -70,23 +71,22 @@
       </pre>
     </div>
     <div class="page-footer">
-      Vue-color-picker 插件由<a
-        href="http://www.rxshc.com/"
-        target="_blank"
-      >猪不乐意</a>编写
+      Vue-color-picker 插件由<a href="http://www.rxshc.com/" target="_blank"
+        >猪不乐意</a
+      >编写
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const color = ref("#ff0000");
+const color = ref('#ff0000')
 
 const headleChangeColor = (color: string) => {
-  console.log(`颜色值改变事件：${color}`);
-};
+  console.log(`颜色值改变事件：${color}`)
+}
 </script>
 
 <style lang="scss">
-@import "assets/main";
+@import 'assets/main';
 </style>
