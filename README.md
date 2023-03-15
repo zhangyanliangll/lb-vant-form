@@ -1,46 +1,54 @@
-# lb-vant-form
+# lbVantForm
 
-This template should help get you started developing with Vue 3 in Vite.
+> 基于 Vant 的表单插件
 
-## Recommended IDE Setup
+## 安装
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-yarn
+```bash
+# vue3
+npm install lbVantform -S
 ```
 
-### Compile and Hot-Reload for Development
+## 使用
 
-```sh
-yarn dev
+### vue3 使用
+
+在`main.ts`文件中引入并注册
+
+```ts
+import lbVantForm from 'lbVantForm'
+const app = createApp(App)
+app.use(lbVantForm)
 ```
 
-### Type-Check, Compile and Minify for Production
+在页面中使用
 
-```sh
-yarn build
+```vue
+<script lang="ts" setup>
+import { ref } from 'vue'
+</script>
+<template>
+  <lb-vant-form></lb-vant-form>
+</template>
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## 特点
 
-```sh
-yarn lint
+1. 简单易用，减少代码的重复书写，解耦;
+2. 提供以 `npm` 的形式安装提供全局组件;
+3. 在支持 html5 input[type='color'] 的浏览器实现了「更多颜色」的功能
+
+## 选项
+
+你可以通过在所在的元素上设置以下属性来配置`color-picker`
+
+1. `defaultColor`：默认颜色，如`defaultColor="#ff0000"`
+2. `disabled`：禁用状态，如`disabled=true`
+
+## 事件
+
+`change`颜色值改变的时候触发
+
+```js
+<lbVantForm />
 ```
