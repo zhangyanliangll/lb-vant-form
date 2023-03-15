@@ -1,5 +1,12 @@
 
 
+## [0.1.3](https://github.com/zhangyanliangll/lb-vant-form/compare/0.1.2...0.1.3) (2023-03-15)
+
+
+### Bug Fixes
+
+* 🐛 init ([d03878c](https://github.com/zhangyanliangll/lb-vant-form/commit/d03878cafb328016ec73a37f244887eb1af6a8d2))
+
 ## [0.1.2](https://github.com/zhangyanliangll/lb-vant-form/compare/0.1.1...0.1.2) (2023-03-15)
 
 
