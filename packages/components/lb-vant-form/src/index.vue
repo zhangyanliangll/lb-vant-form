@@ -1,5 +1,5 @@
 <template>
-  <div class="page-container">奥术大师大</div>
+  <div class="page-container"></div>
 </template>
 
 <script lang="ts" setup>

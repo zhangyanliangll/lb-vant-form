@@ -4,45 +4,36 @@
       <h1>lbVantForm</h1>
       <h2>基于 Vant 4.0 二次封装的表单组件</h2>
       <a
-        href="https://github.com/zhangyanliang/lb-vant-form"
+        href="https://github.com/zhangyanliangll/lb-vant-form"
         class="btn"
         target="_blank"
         >View on GitHub</a
       >
     </div>
     <div class="page-content" v-hljs>
-      <h1>lbVantForm</h1>
-      <p>
-        本插件仿照<code>Angular</code>的<code
-          ><a href="http://zhangbobell.github.io/color-picker/" target="_blank"
-            >color-picker</a
-          ></code
-        >插件制作
-      </p>
       <h2>Demo</h2>
-      <colorPicker v-model="color" @change="headleChangeColor"></colorPicker>
+      <div class="lb-vant-form-container">
+        <lb-vant-form />
+      </div>
       <h2>特点</h2>
       <ol>
-        <li>简单易用，UI在原插件基础上优化增加了圆角和过渡动画</li>
+        <li>简单易用，解耦</li>
         <li>提供以 npm 的形式安装提供全局组件</li>
-        <li>
-          在支持 html5 input[type='color'] 的浏览器实现了「更多颜色」的功能
-        </li>
       </ol>
       <h2>安装</h2>
-      <pre>$ npm install vcolorpicker -S</pre>
+      <pre>$ npm install lb-vant-form -S</pre>
       <h2>使用</h2>
       <h3>在 `main.js` 文件中引入插件并注册</h3>
       <pre>
             # main.js
-            import vcolorpicker from 'vcolorpicker'
-            Vue.use(vcolorpicker)
+            import LbVantForm from 'lb-vant-form'
+            Vue.use(LbVantForm)
         </pre
       >
-      <h3>在项目中使用 vcolorpicker</h3>
+      <h3>在项目中使用 LbVantForm</h3>
       <pre>
     &lt;template&gt;
-        &lt;colorPicker v-model=&quot;color&quot; /&gt;
+        &lt;lb-vant-form  v-model=&quot;color&quot; /&gt;
       &lt;/template&gt;
       &lt;script&gt;
         export default {
@@ -67,26 +58,28 @@
       <h2>事件</h2>
       <p><code>change</code>颜色值改变的时候触发</p>
       <pre>
-          &lt;colorPicker v-model=&quot;color&quot; v-on:change=&quot;headleChangeColor&quot;&gt;&lt;/colorPicker&gt;
+          &lt;lb-vant-form v-model=&quot;color&quot; v-on:change=&quot;headleChangeColor&quot;/&gt;
       </pre>
     </div>
     <div class="page-footer">
-      Vue-color-picker 插件由<a href="http://www.rxshc.com/" target="_blank"
-        >猪不乐意</a
+      lb-vant-form 插件由<a
+        href="https://zhangyanliangll.github.io/about/"
+        target="_blank"
+        >Tiankui Star</a
       >编写
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-
-const color = ref('#ff0000')
-
-const headleChangeColor = (color: string) => {
-  console.log(`颜色值改变事件：${color}`)
-}
 </script>
 
 <style lang="scss">
 @import 'assets/main';
+
+.lb-vant-form-container {
+  width: 350px;
+  height: 600px;
+  // background: red;
+}
 </style>
