@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="page-header">
-      <h1>lbVantForm</h1>
+      <h1>lb-vant-form</h1>
       <h2>基于 Vant 4.0 二次封装的表单组件</h2>
       <a
         href="https://github.com/zhangyanliangll/lb-vant-form"
@@ -75,11 +75,12 @@ import { ref } from 'vue'
 </script>
 
 <style lang="scss">
+@import 'vant/lib/index.css';
 @import 'assets/main';
 
 .lb-vant-form-container {
   width: 350px;
   height: 600px;
-  // background: red;
+  background: red;
 }
 </style>
