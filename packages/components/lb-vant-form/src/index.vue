@@ -3,10 +3,10 @@
     <CellGroup inset>
       <template v-for="(item, index) in formGroup" :key="index">
         <Field
-          v-model="value"
+          v-model="value1"
           name="picker"
           v-bind="item"
-          @click="piack.onShow(item)"
+          @click="onShow(item)"
         >
           <template
             #input
@@ -25,21 +25,65 @@
   </Form>
   <!-- 弹层组件 -->
   <teleport :to="teleportId">
-    <Popup v-model:show="piack.isShow" position="bottom">
+    <component
+      :is="targetElement === 'van-picker' ? Popup : 'div'"
+      v-model:show="isShow"
+      position="bottom"
+    >
+      <component
+        :ref="valueKey"
+        :is="Elements[targetElement]"
+        :columns="options"
+        v-model:show="isShow"
+        v-bind="optionProps"
+        v-on="targetEvent || {}"
+        @confirm="onConfirm"
+        @cancel="isShow = false"
+      />
+    </component>
+    <!-- <Popup
+      v-model:show="piack.isShow"
+      position="bottom"
+      v-if="piack.targetElement === 'van-picker'"
+    >
       <Picker
-        v-bind="piack.optionAlias"
-        :columns="piack.columns"
+        :ref="piack.key"
+        v-bind="{
+          ...piack.optionAlias,
+          ...piack.optionProps,
+        }"
+        :columns="piack.options"
+        @confirm="piack.onConfirm"
+        @cancel="piack.isShow = false"
+        v-on="piack.targetEvent || {}"
+      />
+    </Popup>-->
+    <!-- <template>
+      <component
+        v-if="piack.targetElement"
+        :ref="piack.key"
+        :is="Elements[piack.targetElement]"
+        v-model:show="piack.isShow"
+        v-bind="piack.optionProps"
+        v-on="piack.targetEvent || {}"
         @confirm="piack.onConfirm"
         @cancel="piack.isShow = false"
       />
-    </Popup>
+    </template> -->
   </teleport>
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, watch, reactive, nextTick, ref } from 'vue'
-import { Form, CellGroup, Field, Popup, Picker } from 'vant'
-
+import {
+  onBeforeMount,
+  watch,
+  reactive,
+  nextTick,
+  ref,
+  toRefs,
+  markRaw,
+} from 'vue'
+import { Form, CellGroup, Field, Popup } from 'vant'
 // 组件名字
 defineOptions({
   name: 'lb-vant-form',
@@ -91,6 +135,34 @@ const props = defineProps({
             },
           ],
         },
+        {
+          targetElement: 'van-calendar',
+          label: '交付日期',
+          isLink: true,
+          readonly: true,
+          value: 'handoverDate',
+          placeholder: '请选择交付日期',
+          optionProps: {
+            'value-format': 'YYYY-MM-DD',
+            type: 'range',
+            color: '#00B9EF',
+          },
+          separateQuery: ['bizDateBegina', 'bizDateEndb'],
+        },
+        {
+          targetElement: 'van-date-picker',
+          label: '交付日期',
+          isLink: true,
+          readonly: true,
+          value: 'handoverDate',
+          placeholder: '请选择交付日期',
+          optionProps: {
+            'value-format': 'YYYY-MM-DD',
+            type: 'range',
+            color: '#00B9EF',
+          },
+          separateQuery: ['bizDateBegina', 'bizDateEndb'],
+        },
       ]
     },
   },
@@ -105,33 +177,76 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'submit', 'cancel'])
 
-const value = ref()
+let Elements: any = {}
+
+const value1 = ref()
 
 // 显示 选择 弹框
-const piack = reactive<any>({
-  key: '',
+let componentConfig = reactive<any>({
+  value: '', //需要更新的 key
   isShow: false,
+  targetElement: '', // 组件名字
   optionAlias: {
     label: 'text',
     value: 'value',
   },
-  columns: [],
-  onShow({ value, options }: any) {
-    piack.key = value
-    piack.columns = options
-    piack.isShow = true
+  optionProps: {},
+  options: [],
+  onShow(row: any) {
+    // const { targetElement } = row
+    // this.isShow
+    const { onConfirm, onShow } = (componentConfig = {})
+    // Object.assign(this, { ...row, isShow: true, targetElement })
+    // console.log(this, '*-*-*-*-*-*-*')
+    // this.key = value
   },
   onConfirm({ value, text }: any) {
-    piack.isShow = false
+    this.isShow = false
   },
 })
+
+const {
+  value: valueKey,
+  isShow,
+  targetElement,
+  targetEvent,
+  optionProps,
+  options,
+  onConfirm,
+  onShow,
+} = toRefs(componentConfig)
 
 onBeforeMount(async () => {
   await init()
 })
 
+const getElementList = () => {
+  props.formGroup.forEach(async ({ targetElement }: any) => {
+    if (targetElement) {
+      const names = targetElement.split('-')
+      const name = names[0] === 'van' ? getElementName(names) : targetElement
+
+      Elements[targetElement] = markRaw(
+        ((await import(`vant/lib`)) as any)[name],
+      )
+    }
+  })
+}
+
+const getElementName = (names: any) => {
+  let str = ''
+  names.forEach((value: string) => {
+    if (value != 'van') {
+      str += value.substr(0, 1).toUpperCase() + value.substring(1)
+    }
+  })
+  return str
+}
+
 // 初始化
-const init = async () => {}
+const init = async () => {
+  await getElementList()
+}
 
 // 提交
 const submit = async () => {
